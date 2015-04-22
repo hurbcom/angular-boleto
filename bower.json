@@ -6,7 +6,10 @@
     "(Bernardo Loureiro <bernardo.lou@gmail.com>)"
   ],
   "description": "[pt-BR]Directive de angularjs para campo de boleto bancário com validação de dígitos verificadores e valor[/pt-BR][en-US]Angularjs directive for bank boleto field with digit validation and value[/en-US]",
-  "main": "/dist/angular-boleto.js",
+  "main": [
+    "dist/angular-boleto.js",
+    "dist/angular-boleto.min.js"
+  ],
   "keywords": [
     "angular",
     "angularjs",
@@ -25,10 +28,15 @@
   ],
   "license": "MIT",
   "ignore": [
+    ".*",
     "**/.*",
+    "app",
     "node_modules",
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "angularjs": "~1.2.28"
+  }
 }
