@@ -46,7 +46,10 @@ Para rodar os testes, executar:
 
 
 ### Nota da instalação
-`
+
+Caso encontre a mensagem abaixo durante a instalação:
+
+```
 Unable to find a suitable version for angular, please choose one:
     1) angular#~1.2.28 which resolved to 1.2.28 and is required by angular-boleto
     2) angular#~1.2.9 which resolved to 1.2.28 and is required by angular-input-masks#1.4.2
@@ -57,7 +60,7 @@ Unable to find a suitable version for angular, please choose one:
 Prefix the choice with ! to persist it to bower.json
 
 ? Answer: 
-`
+```
 
 Escolha a opção requerida pelo **angular-boleto**, no exemplo, a opção 1 (um).
 
