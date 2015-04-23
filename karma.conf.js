@@ -27,9 +27,8 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: bowerDependencies.js.concat([
       'app/scripts/app.js',
-      'app/scripts/angular-boleto.js',
-      'app/scripts/angular-locale_pt-br.js',
-      'test/boletoSpec.js'
+      'app/scripts/*.*',
+      'test/*Spec.js'
     ]),
 
 
