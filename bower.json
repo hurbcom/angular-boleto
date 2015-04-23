@@ -7,7 +7,7 @@
   ],
   "description": "[pt-BR]Directive de angularjs para campo de boleto bancário com validação de dígitos verificadores e valor[/pt-BR][en-US]Angularjs directive for bank boleto field with digit validation and value[/en-US]",
   "main": [
-    "/app/scripts/angular-boleto.js"
+    "angular-boleto.js"
   ],
   "keywords": [
     "angular",
