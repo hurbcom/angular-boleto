@@ -40,10 +40,10 @@
   ],
   "license": "MIT",
   "ignore": [
+    "app/bower_components",
+    "app/scripts/angular-locale*.js",
+    "app/scripts/app.js",
     "app/*.*",
-    "bower_components",
-    "scripts/angular-locale*.js",
-    "scripts/app.js",
     "node_modules",
     "test",
     ".bowerrc",
