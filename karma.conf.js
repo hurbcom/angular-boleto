@@ -18,16 +18,16 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'app/bower_components/angular/angular.js',
-      'app/bower_components/angular-ui-utils/ui-utils.js',
+      'app/bower_components/angular-ui-utils/mask.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
       'app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'app/bower_components/br-validations/releases/br-validations.js',
       'app/bower_components/string-mask/src/string-mask.js',
       'app/bower_components/angular-input-masks/angular-input-masks.js',
       'app/scripts/app.js',
-      'app/scripts/angular-locale_pt-br.js',
       'app/scripts/angular-boleto.js',
-      'test/**/*.js'
+      'app/scripts/angular-locale_pt-br.js',
+      'test/boletoSpec.js'
     ],
 
 

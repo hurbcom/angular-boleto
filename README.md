@@ -14,8 +14,7 @@ Angularjs directive for bank boleto* field with digit validation and value.
 [/en-US]
 
 
-Instalação (Ubuntu Linux) do ambiente para desenvolvimento, teste e geração de versão de distribuição
-==========
+## Instalação (Ubuntu Linux) do ambiente para desenvolvimento, teste e geração de versão de distribuição
 
 Instalar node:
 
@@ -46,7 +45,23 @@ Para rodar os testes, executar:
 `gulp test`
 
 
-Uso
-===
+### Nota da instalação
+`
+Unable to find a suitable version for angular, please choose one:
+    1) angular#~1.2.28 which resolved to 1.2.28 and is required by angular-boleto
+    2) angular#~1.2.9 which resolved to 1.2.28 and is required by angular-input-masks#1.4.2
+    3) angular#>=1 <1.3.0 which resolved to 1.2.28 and is required by angular-bootstrap#0.12.1
+    4) angular#>= 1.0.2 which resolved to 1.2.28 and is required by angular-ui-utils#944109c262
+    5) angular#1.3.15 which resolved to 1.3.15 and is required by angular-mocks#1.3.15
+
+Prefix the choice with ! to persist it to bower.json
+
+? Answer: 
+`
+
+Escolha a opção requerida pelo **angular-boleto**, no exemplo, a opção 1 (um).
+
+
+## Uso
 
 O modelo deve ser passado para directive como $parent.nomeDoModelo porque a directive possui um scope próprio e o $parent (scope) será por consequência o scope do controller onde a directive foi chamada.

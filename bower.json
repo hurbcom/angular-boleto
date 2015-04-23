@@ -3,12 +3,11 @@
   "version": "0.0.0",
   "homepage": "https://github.com/bernardolm/angular-boleto",
   "authors": [
-    "(Bernardo Loureiro <bernardo.lou@gmail.com>)"
+    "Bernardo Loureiro <bernardo.lou@gmail.com> (http://bernardoloureiro.com.br)"
   ],
   "description": "[pt-BR]Directive de angularjs para campo de boleto bancário com validação de dígitos verificadores e valor[/pt-BR][en-US]Angularjs directive for bank boleto field with digit validation and value[/en-US]",
   "main": [
-    "dist/angular-boleto.js",
-    "dist/angular-boleto.min.js"
+    "app/scripts/angular-boleto.js"
   ],
   "keywords": [
     "angular",
@@ -24,7 +23,14 @@
     "bank",
     "bill",
     "payment",
-    "billet"
+    "billet",
+    "transação",
+    "transacao",
+    "financeira",
+    "financeiro",
+    "financial",
+    "finance",
+    "transaction"
   ],
   "license": "MIT",
   "ignore": [
@@ -38,7 +44,7 @@
   ],
   "dependencies": {
     "angular": "~1.2.28",
-    "angular-ui-utils": "bower"
+    "angular-ui-utils": "bower-mask"
   },
   "devDependencies": {
     "angular-mocks": "~1.3.15",
