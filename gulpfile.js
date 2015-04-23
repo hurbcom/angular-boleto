@@ -51,7 +51,7 @@ gulp.task('inject', ['bower'], function() {
     .pipe(gulp.dest('app'));
 });
 
-gulp.task('test', function (done) {
+gulp.task('test', ['bower'], function (done) {
   karma.start({
     configFile: __dirname + '/karma.conf.js',
     singleRun: true

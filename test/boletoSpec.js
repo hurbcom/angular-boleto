@@ -3,7 +3,7 @@ describe('Campo de boleto bancário', function () {
   var $rootScope;
   var $scope;
 
-  beforeEach(module('BoletoApp'));
+  beforeEach(module('angular.boleto'));
 
   beforeEach(inject(function (_$compile_, _$rootScope_){
     $compile = _$compile_;

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('BoletoApp')
+angular.module('angular.boleto')
 
   .directive('inputBoleto', function () {
     return {

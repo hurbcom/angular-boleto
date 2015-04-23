@@ -12,6 +12,11 @@
   "keywords": [
     "angular",
     "angularjs",
+    "directive",
+    "input",
+    "validação",
+    "validacao",
+    "validation",
     "boleto bancário",
     "boleto bancario",
     "boleto",
@@ -34,13 +39,19 @@
   ],
   "license": "MIT",
   "ignore": [
-    ".*",
-    "**/.*",
     "app",
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    ".bowerrc",
+    ".gitignore",
+    "README.md",
+    "bower.json",
+    "gulpfile.js",
+    "karma.conf.js",
+    "package.json",
+    "**/.*",
+    ".*"
   ],
   "dependencies": {
     "angular": "~1.2.28",
