@@ -44,3 +44,9 @@ Para rodar o projeto em modo desenvolvimento, executar:
 Para rodar os testes, executar:
 
 `gulp test`
+
+
+Uso
+===
+
+O modelo deve ser passado para directive como $parent.nomeDoModelo porque a directive possui um scope próprio e o $parent (scope) será por consequência o scope do controller onde a directive foi chamada.
