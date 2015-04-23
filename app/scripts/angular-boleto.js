@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('angular.boleto')
+angular.module('angular.boleto', ['ui.bootstrap', 'ui.mask', 'ui.utils.masks'])
 
   .directive('inputBoleto', function () {
     return {
