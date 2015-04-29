@@ -2,7 +2,7 @@
 
 angular.module('angular.boleto', ['ui.bootstrap', 'ui.mask'])
 
-  .directive('inputBoleto', function () {
+  .directive('inputBoleto', [function () {
     return {
       restrict: 'E',
       replace: true,
@@ -148,5 +148,5 @@ angular.module('angular.boleto', ['ui.bootstrap', 'ui.mask'])
         }; // validarBlocos
       }
     }
-  })
+  }])
 ;
