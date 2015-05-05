@@ -43,6 +43,7 @@ gulp.task('inject', ['bower'], function() {
   // Ordem de injeção de scripts
   var sources = gulp.src(
     ['./app/scripts/app.js',
+    '!./app/**/*.min.js',
     './app/scripts/*.js'],
     {read: false});
 
@@ -54,6 +55,6 @@ gulp.task('inject', ['bower'], function() {
 gulp.task('test', ['bower'], function (done) {
   karma.start({
     configFile: __dirname + '/karma.conf.js',
-    singleRun: true
+    singleRun: false
   }, done);
 });

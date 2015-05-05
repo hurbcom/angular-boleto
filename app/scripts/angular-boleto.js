@@ -1,8 +1,33 @@
 'use strict';
 
-angular.module('angular.boleto', ['ui.bootstrap', 'ui.mask'])
+angular.module('angular.boleto', ['ui.mask'])
 
-  .directive('inputBoleto', [function () {
+  .filter('utc', ['$filter', function ($filter) {
+    return function (date, format) {
+      var dateOk,
+          dateResult;
+      if (angular.isNumber(date) || angular.isString(date))
+        dateOk = new Date(date);
+      if (angular.isDate(dateOk)) {
+        dateResult = new Date(
+          dateOk.getUTCFullYear(),
+          dateOk.getUTCMonth(),
+          dateOk.getUTCDate(),
+          dateOk.getUTCHours(),
+          dateOk.getUTCMinutes(),
+          dateOk.getUTCSeconds());
+      }
+      else {
+        dateResult = date;
+      }
+      if (typeof format !== 'undefined' && format)
+        return $filter('date')(dateResult, format);
+      else
+        return dateResult;
+    };
+  }])
+
+  .directive('inputBoleto', ['$filter', function ($filter) {
     return {
       restrict: 'E',
       replace: true,
@@ -10,9 +35,10 @@ angular.module('angular.boleto', ['ui.bootstrap', 'ui.mask'])
       scope: {
         form: '=',
         name: '@',
-        validarValor: '='
+        validarValor: '=',
+        validarVencimento: '='
       },
-      template: '<input type="text" ui-mask="?99999.99999 99999.999999 99999.999999 9 99999999999999" placeholder="_____._____ _____.______ _____.______ _ ______________" />',
+      template: '<input type="text" ui-mask="?99999.99999 99999.999999 99999.999999 9 99999999999999" />',
       link: function (scope, elem, attrs, ctrl) {
 
         scope.$watch(attrs.ngModel, function (newVal) {
@@ -60,6 +86,7 @@ angular.module('angular.boleto', ['ui.bootstrap', 'ui.mask'])
           scope.form[scope.name].$setValidity('bloco2Errado', true);
           scope.form[scope.name].$setValidity('bloco3Errado', true);
           scope.form[scope.name].$setValidity('valorErrado', true);
+          scope.form[scope.name].$setValidity('vencimentoErrado', true);
         }; // resetarValidade
 
         /*
@@ -107,6 +134,21 @@ angular.module('angular.boleto', ['ui.bootstrap', 'ui.mask'])
           return digito;
         }; // calcularDigitoVerificador
 
+        var calcularVencimentoPeloFator = function (fatorVencimento) {
+          var dataBase = $filter('utc')('1997-10-07');
+
+          // comunicado FEBRABAN de n° 082/2012 de 14/06/2012
+          var dataLimite = $filter('utc')('2025-02-21');
+          var dataParaValidacao = $filter('utc')(scope.validarVencimento);
+          if (dataParaValidacao > dataLimite) {
+            console.log('Data dentro do limite normalizado no comunicado FEBRABAN de n° 082/2012 de 14/06/2012.', scope.validarVencimento);
+            dataBase = $filter('utc')('2022-05-29');
+          }
+
+          dataBase.setTime(dataBase.getTime() + (parseInt(fatorVencimento) * 24 * 60 * 60 * 1000));
+          return dataBase;
+        }; // calcularVencimentoPeloFator
+
         var validarBlocos = function (numeroBoleto) {
           var campo1 = numeroBoleto.substr(0, 9);
           var dig1 = numeroBoleto.substr(9, 1);
@@ -133,7 +175,16 @@ angular.module('angular.boleto', ['ui.bootstrap', 'ui.mask'])
           }
 
           //var campo4 = numeroBoleto.substr(32, 1); // Digito verificador
-          //var campo5 = numeroBoleto.substr(33, 14); // Vencimento + Valor
+
+          if (typeof scope.validarVencimento !== 'undefined' && scope.validarVencimento !== '') {
+            var fatorVencimento = numeroBoleto.substr(33, 4);
+            var vencimentoPeloFator = calcularVencimentoPeloFator(fatorVencimento);
+            vencimentoPeloFator = $filter('date')(vencimentoPeloFator, 'yyyy-MM-dd');
+            if (scope.validarVencimento !== vencimentoPeloFator) {
+              scope.form[scope.name].$setValidity('vencimentoErrado', false);
+              return false;
+            }
+          }
 
           if (typeof scope.validarValor !== 'undefined') {
             var valor = numeroBoleto.substr(37, 10);

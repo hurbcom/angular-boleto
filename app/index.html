@@ -25,17 +25,22 @@
     <div class="page-header">
       <h1>Boleto bancário</h1>
     </div>
-    
+
     <ng-form name="form1">
 
       <div class="form-group">
         <label>Valor para ser validado</label>
-        <input ng-model="$parent.valor" class="form-control" name="valor" ui-money-mask />
+        <input type="text" ng-model="$parent.valor" class="form-control" name="valor" ui-money-mask />
+      </div>
+
+      <div class="form-group">
+        <label>Vencimento para ser validado</label>
+        <input type="date" ng-model="$parent.vencimento" class="form-control" name="vencimento" />
       </div>
 
       <div class="form-group" ng-class="{'has-error': form1.boleto.$dirty && form1.boleto.$invalid}">
         <label>Número do boleto bancário</label>
-        <input-boleto ng-model="$parent.boleto" class="form-control" validar-valor="$parent.valor" form="form1" name="boleto" required></input-boleto>
+        <input-boleto ng-model="$parent.boleto" class="form-control" validar-valor="$parent.valor" validar-vencimento="$parent.vencimento" form="form1" name="boleto" required></input-boleto>
 
         <span ng-messages="form1.boleto.$dirty && form1.boleto.$error">
           <span class="help-block" ng-show="form1.boleto.$error.tamanhoErrado">Seu número de boleto tem um tamanho inválido</span>
@@ -45,6 +50,7 @@
           <span class="help-block" ng-show="form1.boleto.$error.bloco2Errado">O segundo bloco no seu número de boleto está incorreto</span>
           <span class="help-block" ng-show="form1.boleto.$error.bloco3Errado">O terceiro bloco no seu número de boleto está incorreto</span>
           <span class="help-block" ng-show="form1.boleto.$error.valorErrado">O valor no seu número de boleto está incorreto</span>
+          <span class="help-block" ng-show="form1.boleto.$error.vencimentoErrado">O vencimento no seu número de boleto está incorreto</span>
         </span>
       </div>
 
