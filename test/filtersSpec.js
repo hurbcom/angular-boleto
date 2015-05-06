@@ -38,4 +38,24 @@ describe('Testando Filters:', function() {
       expect(dateUTC).toBe('01/09/2014');
     });
   });
+
+  describe('boleto:', function() {
+    it('0-boleto deve estar definido', function() {
+      expect($filter('boleto')).toBeDefined();
+    });
+
+    it('1-boleto', function() {
+      var boleto = '21890010070014560208200371313180159470127456789';
+      var boletoFormatado = $filter('boleto')(boleto);
+
+      expect(boletoFormatado).toBe('21890.01007 00145.602082 00371.313180 1 59470127456789');
+    });
+
+    it('2-boleto', function() {
+      var boleto = '';
+      var boletoFormatado = $filter('boleto')(boleto);
+
+      expect(boletoFormatado).toBe('');
+    });
+  });
 });

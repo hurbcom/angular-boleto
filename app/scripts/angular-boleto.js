@@ -2,6 +2,29 @@
 
 angular.module('angular.boleto', ['ui.mask'])
 
+  .filter('boleto', ['$filter', function ($filter) {
+    return function (boleto) {
+      if (typeof boleto !== 'undefined') {
+        var boleto = boleto.replace(/[^0-9-]/g,'');
+
+        if (boleto === '') {
+          return '';
+        }
+
+        var boletoFormatado = boleto.slice(0, 5) + '.';
+        boletoFormatado = boletoFormatado + boleto.slice(5, 10) + ' ';
+        boletoFormatado = boletoFormatado + boleto.slice(10, 15) + '.';
+        boletoFormatado = boletoFormatado + boleto.slice(15, 21) + ' ';
+        boletoFormatado = boletoFormatado + boleto.slice(21, 26) + '.';
+        boletoFormatado = boletoFormatado + boleto.slice(26, 32) + ' ';
+        boletoFormatado = boletoFormatado + boleto.slice(32, 33) + ' ';
+        boletoFormatado = boletoFormatado + boleto.slice(33, 47);
+
+        return boletoFormatado;
+      }
+    };
+  }])
+
   .filter('utc', ['$filter', function ($filter) {
     return function (date, format) {
       var dateOk, dateResult;
