@@ -216,11 +216,13 @@ angular.module('angular.boleto', ['ui.mask'])
 
           if (typeof scope.validarVencimento !== 'undefined' && scope.validarVencimento !== '') {
             var fatorVencimento = numeroBoleto.substr(33, 4);
-            var vencimentoPeloFator = calcularVencimentoPeloFator(fatorVencimento);
-            vencimentoPeloFator = $filter('utc')(vencimentoPeloFator, 'yyyy-MM-dd');
-            if (scope.validarVencimento !== vencimentoPeloFator) {
-              scope.form[scope.name].$setValidity('vencimentoErrado', false);
-              return false;
+            if ((fatorVencimento * 1) >= 1000) {
+              var vencimentoPeloFator = calcularVencimentoPeloFator(fatorVencimento);
+              vencimentoPeloFator = $filter('utc')(vencimentoPeloFator, 'yyyy-MM-dd');
+              if (scope.validarVencimento !== vencimentoPeloFator) {
+                scope.form[scope.name].$setValidity('vencimentoErrado', false);
+                return false;
+              }
             }
           }
 
