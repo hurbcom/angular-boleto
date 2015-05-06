@@ -184,4 +184,46 @@ describe('Campo de boleto bancário', function () {
     expect($scope.form1.boleto.$error.vencimentoErrado).toBe(false);
   });
   /*** Fim - Testes para comunicado FEBRABAN de n° 082/2012 de 14/06/2012 ***/
+
+  it ('deverá estar válido com código de boleto com vencimento correto', function () {
+    $rootScope.vencimento = '2000-07-03';
+    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180110000127456789');
+    $scope.$digest();
+
+    expect($scope.form1.$valid).toBe(true);
+    expect($scope.form1.boleto.$valid).toBe(true);
+    expect($scope.form1.boleto.$error.vencimentoErrado).toBe(false);
+  });
+
+  it ('deverá estar válido com código de boleto com vencimento correto', function () {
+    $rootScope.vencimento = '2015-05-05';
+    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180164190000093796');
+    $scope.$digest();
+
+    expect($scope.form1.$valid).toBe(true);
+    expect($scope.form1.boleto.$valid).toBe(true);
+    expect($scope.form1.boleto.$error.vencimentoErrado).toBe(false);
+  });
+
+  /*** Testes para datas acima do limite da FEBRABAN
+  it ('deverá estar válido com código de boleto com vencimento correto', function () {
+    $rootScope.vencimento = '2052-07-09';
+    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180199990000093796');
+    $scope.$digest();
+
+    expect($scope.form1.$valid).toBe(true);
+    expect($scope.form1.boleto.$valid).toBe(true);
+    expect($scope.form1.boleto.$error.vencimentoErrado).toBe(false);
+  });
+
+  it ('deverá estar válido com código de boleto com vencimento correto', function () {
+    $rootScope.vencimento = '2052-07-10';
+    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180110000000093796');
+    $scope.$digest();
+
+    expect($scope.form1.$valid).toBe(true);
+    expect($scope.form1.boleto.$valid).toBe(true);
+    expect($scope.form1.boleto.$error.vencimentoErrado).toBe(false);
+  });
+  */
 });

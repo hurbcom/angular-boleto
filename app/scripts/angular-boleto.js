@@ -4,10 +4,10 @@ angular.module('angular.boleto', ['ui.mask'])
 
   .filter('utc', ['$filter', function ($filter) {
     return function (date, format) {
-      var dateOk,
-          dateResult;
-      if (angular.isNumber(date) || angular.isString(date))
+      var dateOk, dateResult;
+      if (angular.isNumber(date) || angular.isString(date)) {
         dateOk = new Date(date);
+      }
       if (angular.isDate(dateOk)) {
         dateResult = new Date(
           dateOk.getUTCFullYear(),
@@ -20,10 +20,12 @@ angular.module('angular.boleto', ['ui.mask'])
       else {
         dateResult = date;
       }
-      if (typeof format !== 'undefined' && format)
+      if (typeof format !== 'undefined' && format) {
         return $filter('date')(dateResult, format);
-      else
+      }
+      else {
         return dateResult;
+      }
     };
   }])
 
@@ -135,18 +137,31 @@ angular.module('angular.boleto', ['ui.mask'])
         }; // calcularDigitoVerificador
 
         var calcularVencimentoPeloFator = function (fatorVencimento) {
-          var dataBase = $filter('utc')('1997-10-07');
+          var addDias = function (dias, data) {
+            data = angular.copy(data);
+            if (typeof data === 'number') {
+              data = $filter('utc')(data);
+            }
+            return data.setTime(data.getTime() + (parseInt(dias) * 24 * 60 * 60 * 1000));
+          };
+
+          var diffDias = function (first, second) {
+            return Math.ceil((second - first) / (24 * 60 * 60 * 1000));
+          };
+
+          var dataBase = $filter('utc')('1997-10-07T00:00:00Z');
 
           // comunicado FEBRABAN de n° 082/2012 de 14/06/2012
-          var dataLimite = $filter('utc')('2025-02-21');
           var dataParaValidacao = $filter('utc')(scope.validarVencimento);
-          if (dataParaValidacao > dataLimite) {
+          var fatorTesteDataBase = diffDias(dataBase, dataParaValidacao);
+          if (fatorTesteDataBase > 9999) {
             console.log('Data dentro do limite normalizado no comunicado FEBRABAN de n° 082/2012 de 14/06/2012.', scope.validarVencimento);
-            dataBase = $filter('utc')('2022-05-29');
+            var novaDataBase = $filter('utc')(addDias(9000, dataBase));
+            dataBase = angular.copy(novaDataBase);
           }
+          // Fim - comunicado FEBRABAN de n° 082/2012 de 14/06/2012
 
-          dataBase.setTime(dataBase.getTime() + (parseInt(fatorVencimento) * 24 * 60 * 60 * 1000));
-          return dataBase;
+          return addDias(fatorVencimento, dataBase);
         }; // calcularVencimentoPeloFator
 
         var validarBlocos = function (numeroBoleto) {
