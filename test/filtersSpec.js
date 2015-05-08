@@ -57,5 +57,19 @@ describe('Testando Filters:', function() {
 
       expect(boletoFormatado).toBe('');
     });
+
+    it('3-boleto', function() {
+      var boleto = undefined;
+      var boletoFormatado = $filter('boleto')(boleto);
+
+      expect(boletoFormatado).toBe('');
+    });
+
+    it('4-boleto', function() {
+      var boleto = null;
+      var boletoFormatado = $filter('boleto')(boleto);
+
+      expect(boletoFormatado).toBe('');
+    });
   });
 });

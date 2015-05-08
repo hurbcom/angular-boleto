@@ -4,7 +4,7 @@ angular.module('angular.boleto', ['ui.mask'])
 
   .filter('boleto', ['$filter', function ($filter) {
     return function (boleto) {
-      if (typeof boleto !== 'undefined') {
+      if (typeof boleto !== 'undefined' && boleto !== null) {
         var boleto = boleto.replace(/[^0-9-]/g,'');
 
         if (boleto === '') {
@@ -21,6 +21,9 @@ angular.module('angular.boleto', ['ui.mask'])
         boletoFormatado = boletoFormatado + boleto.slice(33, 47);
 
         return boletoFormatado;
+      }
+      else {
+        return '';
       }
     };
   }])
