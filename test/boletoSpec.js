@@ -225,6 +225,16 @@ describe('Campo de boleto bancário', function () {
     expect($scope.form1.boleto.$error.vencimentoErrado).toBe(false);
   });
 
+  it ('deverá estar válido com código de boleto com valor correto', function () {
+    $rootScope.valor = "1274567.89";
+    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180100000127456789');
+    $scope.$digest();
+
+    expect($scope.form1.$valid).toBe(true);
+    expect($scope.form1.boleto.$valid).toBe(true);
+    expect($scope.form1.boleto.$error.valorErrado).toBe(false);
+  });
+
   /*** Testes para datas acima do limite da FEBRABAN
   it ('deverá estar válido com código de boleto com vencimento correto', function () {
     $rootScope.vencimento = '2052-07-09';

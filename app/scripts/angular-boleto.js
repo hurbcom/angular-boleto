@@ -232,7 +232,7 @@ angular.module('angular.boleto', ['ui.mask'])
           if (typeof scope.validarValor !== 'undefined') {
             var valor = numeroBoleto.substr(37, 10);
             valor = parseFloat(valor.substr(0, 8) + '.' + valor.substr(valor.length-2));
-            if (valor !== scope.validarValor) {
+            if (valor !== parseFloat(scope.validarValor)) {
               scope.form[scope.name].$setValidity('valorErrado', false);
               return false;
             }

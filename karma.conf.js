@@ -28,6 +28,7 @@ module.exports = function(config) {
     files: bowerDependencies.js.concat([
       'app/scripts/app.js',
       'app/scripts/*.*',
+      '!app/**/*.min.js',
       'test/*Spec.js'
     ]),
 
