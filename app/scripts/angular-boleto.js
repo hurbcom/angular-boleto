@@ -3,8 +3,8 @@
 angular.module('angular.boleto', ['ui.mask'])
 
   .filter('boleto', ['$filter', function ($filter) {
-    return function (boleto) {
-      if (typeof boleto !== 'undefined' && boleto !== null) {
+    return function (boleto, altText) {
+      if (typeof boleto !== 'undefined' && boleto !== null && boleto !== '') {
         var boleto = boleto.replace(/[^0-9-]/g,'');
 
         if (boleto === '') {
@@ -23,7 +23,10 @@ angular.module('angular.boleto', ['ui.mask'])
         return boletoFormatado;
       }
       else {
-        return '';
+        if (typeof altText !== 'undefined' && altText !== null && altText !== '')
+          return altText;
+        else
+          return '';
       }
     };
   }])

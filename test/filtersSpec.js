@@ -71,5 +71,12 @@ describe('Testando Filters:', function() {
 
       expect(boletoFormatado).toBe('');
     });
+
+    it('5-boleto', function() {
+      var boleto = null;
+      var boletoFormatado = $filter('boleto')(boleto, 'Não existe boleto');
+
+      expect(boletoFormatado).toBe('Não existe boleto');
+    });
   });
 });
