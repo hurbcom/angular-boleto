@@ -225,7 +225,8 @@ angular.module('angular.boleto', ['ui.mask'])
             if ((fatorVencimento * 1) >= 1000) {
               var vencimentoPeloFator = calcularVencimentoPeloFator(fatorVencimento);
               vencimentoPeloFator = $filter('utc')(vencimentoPeloFator, 'yyyy-MM-dd');
-              if (scope.validarVencimento !== vencimentoPeloFator) {
+              var validarVencimento = $filter('utc')(scope.validarVencimento, 'yyyy-MM-dd');
+              if (validarVencimento < vencimentoPeloFator) {
                 scope.form[scope.name].$setValidity('vencimentoErrado', false);
                 return false;
               }

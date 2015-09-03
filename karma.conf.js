@@ -5,9 +5,9 @@
 
 
 module.exports = function(config) {
-  
+
   var wiredep = require('wiredep');
-  
+
   var bowerDependencies = wiredep({
     directory: 'app/bower_components',
     devDependencies: true
@@ -26,9 +26,9 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: bowerDependencies.js.concat([
+      'app/scripts/angular-boleto.js',
+      'app/scripts/angular-locale_pt-br.js',
       'app/scripts/app.js',
-      'app/scripts/*.*',
-      '!app/**/*.min.js',
       'test/*Spec.js'
     ]),
 

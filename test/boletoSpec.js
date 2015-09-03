@@ -113,7 +113,7 @@ describe('Campo de boleto bancário', function () {
     expect($scope.form1.boleto.$valid).toBe(false);
     expect($scope.form1.boleto.$error.bloco3Errado).toBe(true);
   });
-  
+
   it ('deverá estar válido com código de boleto com vencimento correto', function () {
     $rootScope.vencimento = '2014-01-18';
     $scope.form1.boleto.$setViewValue('21890010070014560208200371313180159470127456789');
@@ -122,6 +122,36 @@ describe('Campo de boleto bancário', function () {
     expect($scope.form1.$valid).toBe(true);
     expect($scope.form1.boleto.$valid).toBe(true);
     expect($scope.form1.boleto.$error.vencimentoErrado).toBe(false);
+  });
+
+  it ('deverá estar válido com código de boleto com vencimento correto', function () {
+    $rootScope.vencimento = '2015-10-03';
+    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180165700127456789');
+    $scope.$digest();
+
+    expect($scope.form1.$valid).toBe(true);
+    expect($scope.form1.boleto.$valid).toBe(true);
+    expect($scope.form1.boleto.$error.vencimentoErrado).toBe(false);
+  });
+
+  it ('deverá estar válido com código de boleto com vencimento maior ou igual a data de vencimento da ordem de pagamento', function () {
+    $rootScope.vencimento = '2014-01-23';
+    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180159470127456789');
+    $scope.$digest();
+
+    expect($scope.form1.$valid).toBe(true);
+    expect($scope.form1.boleto.$valid).toBe(true);
+    expect($scope.form1.boleto.$error.vencimentoErrado).toBe(false);
+  });
+
+  it ('deverá estar inválido com código de boleto com vencimento menor a data de vencimento da ordem de pagamento', function () {
+    $rootScope.vencimento = '2014-01-15';
+    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180159470127456789');
+    $scope.$digest();
+
+    expect($scope.form1.$valid).toBe(false);
+    expect($scope.form1.boleto.$valid).toBe(false);
+    expect($scope.form1.boleto.$error.vencimentoErrado).toBe(true);
   });
 
   it ('deverá estar válido com código de boleto sem vencimento', function () {
