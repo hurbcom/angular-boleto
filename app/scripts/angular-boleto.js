@@ -2,10 +2,10 @@
 
 angular.module('angular.boleto', ['ui.mask'])
 
-  .filter('boleto', ['$filter', function ($filter) {
+  .filter('boleto', function () {
     return function (boleto, altText) {
       if (typeof boleto !== 'undefined' && boleto !== null && boleto !== '') {
-        var boleto = boleto.replace(/[^0-9-]/g,'');
+        boleto = boleto.replace(/[^0-9-]/g,'');
 
         if (boleto === '') {
           return '';
@@ -29,7 +29,7 @@ angular.module('angular.boleto', ['ui.mask'])
           return '';
       }
     };
-  }])
+  })
 
   .filter('utc', ['$filter', function ($filter) {
     return function (date, format) {
@@ -70,7 +70,7 @@ angular.module('angular.boleto', ['ui.mask'])
         validarVencimento: '='
       },
       template: '<input type="text" ui-mask="?99999.99999 99999.999999 99999.999999 9 99999999999999" />',
-      link: function (scope, elem, attrs, ctrl) {
+      link: function (scope, elem, attrs) {
 
         scope.$watch(attrs.ngModel, function (newVal) {
           validar(newVal);
@@ -81,7 +81,7 @@ angular.module('angular.boleto', ['ui.mask'])
 
           resetarValidade();
 
-          if (typeof val === 'undefined' || val.length == 0)
+          if (typeof val === 'undefined' || val.length === 0)
             return;
           else
             numeroBoleto = val.replace(/[^0-9]/g, '');
@@ -98,13 +98,13 @@ angular.module('angular.boleto', ['ui.mask'])
 
           // TODO: Para poder calcular o dígito verificador será necessário identificar o banco pois há diferenças na verificação para alguns bancos como o BB por exemplo.
           /*
-          if (numeroBoleto.length == 47 && calcularDigitoVerificadorGeral(numeroBoleto.substr(0, 4) + numeroBoleto.substr(5, 39)) != numeroBoleto.substr(4, 1)) {
+          if (numeroBoleto.length === 47 && calcularDigitoVerificadorGeral(numeroBoleto.substr(0, 4) + numeroBoleto.substr(5, 39)) != numeroBoleto.substr(4, 1)) {
             scope.form[scope.name].$setValidity('verificadorErrado', false);
             return false;
           }
           */
 
-          if (numeroBoleto.length == 47 && validarBlocos(numeroBoleto)) {
+          if (numeroBoleto.length === 47 && validarBlocos(numeroBoleto)) {
             return true;
           }
         }; // $scope.validar
@@ -137,7 +137,7 @@ angular.module('angular.boleto', ['ui.mask'])
           var digito = 11 - (soma % 11);
           if (digito >  9)
             digito = 0;
-          if (digito == 0)
+          if (digito === 0)
             digito = 1;
           return digito;
         }; // calcularDigitoVerificadorGeral
@@ -153,14 +153,14 @@ angular.module('angular.boleto', ['ui.mask'])
             if (multiplicacao >= 10)
               multiplicacao = 1 + (multiplicacao-10);
             soma = soma + multiplicacao;
-            if (peso == 2)
+            if (peso === 2)
               peso = 1;
             else
               peso = 2;
             contador = contador - 1;
           }
           var digito = 10 - (soma % 10);
-          if (digito == 10)
+          if (digito === 10)
             digito = 0;
           return digito;
         }; // calcularDigitoVerificador
@@ -197,7 +197,7 @@ angular.module('angular.boleto', ['ui.mask'])
           var campo1 = numeroBoleto.substr(0, 9);
           var dig1 = numeroBoleto.substr(9, 1);
           var dv1 = calcularDigitoVerificador(campo1);
-          if (parseInt(campo1) === 0 || dig1 != dv1) {
+          if (parseInt(campo1) === 0 || dig1 !== dv1.toString()) {
             scope.form[scope.name].$setValidity('bloco1Errado', false);
             return false;
           }
@@ -205,7 +205,7 @@ angular.module('angular.boleto', ['ui.mask'])
           var campo2 = numeroBoleto.substr(10, 10);
           var dig2 = numeroBoleto.substr(20, 1);
           var dv2 = calcularDigitoVerificador(campo2);
-          if (parseInt(campo2) === 0 || dig2 != dv2) {
+          if (parseInt(campo2) === 0 || dig2 !== dv2.toString()) {
             scope.form[scope.name].$setValidity('bloco2Errado', false);
             return false;
           }
@@ -213,7 +213,7 @@ angular.module('angular.boleto', ['ui.mask'])
           var campo3 = numeroBoleto.substr(21, 10);
           var dig3 = numeroBoleto.substr(31, 1);
           var dv3 = calcularDigitoVerificador(campo3);
-          if (parseInt(campo3) === 0 || dig3 != dv3) {
+          if (parseInt(campo3) === 0 || dig3 !== dv3.toString()) {
             scope.form[scope.name].$setValidity('bloco3Errado', false);
             return false;
           }
@@ -225,8 +225,12 @@ angular.module('angular.boleto', ['ui.mask'])
             if ((fatorVencimento * 1) >= 1000) {
               var vencimentoPeloFator = calcularVencimentoPeloFator(fatorVencimento);
               vencimentoPeloFator = $filter('utc')(vencimentoPeloFator, 'yyyy-MM-dd');
+              vencimentoPeloFator = parseInt(vencimentoPeloFator.replace('-', '').replace('-', ''), 10);
+
               var validarVencimento = $filter('utc')(scope.validarVencimento, 'yyyy-MM-dd');
-              if (validarVencimento < vencimentoPeloFator) {
+              validarVencimento = parseInt(validarVencimento.replace('-', '').replace('-', ''), 10);
+
+              if (validarVencimento > vencimentoPeloFator) {
                 scope.form[scope.name].$setValidity('vencimentoErrado', false);
                 return false;
               }
@@ -245,6 +249,6 @@ angular.module('angular.boleto', ['ui.mask'])
           return true;
         }; // validarBlocos
       }
-    }
+    };
   }])
 ;
