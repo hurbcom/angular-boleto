@@ -288,4 +288,126 @@ describe('Campo de boleto bancário', function () {
     expect($scope.form1.boleto.$error.vencimentoErrado).toBe(false);
   });
   */
+
+  it ('deverá estar inválido com código de boleto com vencimento incorreto', function () {
+    $rootScope.vencimento = '2015-10-21';
+
+    $scope.form1.boleto.$setViewValue('23793380039904000214116006352500665510000039800');
+    $scope.$digest();
+
+    expect($scope.form1.$valid).toBe(false);
+    expect($scope.form1.boleto.$valid).toBe(false);
+    expect($scope.form1.boleto.$error.vencimentoErrado).toBe(true);
+  });
+
+  it ('deverá estar inválido com código de boleto com vencimento incorreto', function () {
+    $rootScope.vencimento = '2015-11-13';
+
+    $scope.form1.boleto.$setViewValue('34191090080028394557491244530001265950000135240');
+    $scope.$digest();
+
+    expect($scope.form1.$valid).toBe(false);
+    expect($scope.form1.boleto.$valid).toBe(false);
+    expect($scope.form1.boleto.$error.vencimentoErrado).toBe(true);
+  });
+
+  it ('deverá estar inválido com código de boleto com vencimento incorreto', function () {
+    $rootScope.vencimento = '2015-11-12';
+
+    $scope.form1.boleto.$setViewValue('23793124049000000053004002002709165930000017238');
+    $scope.$digest();
+
+    expect($scope.form1.$valid).toBe(false);
+    expect($scope.form1.boleto.$valid).toBe(false);
+    expect($scope.form1.boleto.$error.vencimentoErrado).toBe(true);
+  });
+
+  it ('deverá estar inválido com código de boleto com vencimento incorreto', function () {
+    $rootScope.vencimento = '2015-12-26';
+
+    $scope.form1.boleto.$setViewValue('03399713352510130003321074801016966350000024237');
+    $scope.$digest();
+
+    expect($scope.form1.$valid).toBe(false);
+    expect($scope.form1.boleto.$valid).toBe(false);
+    expect($scope.form1.boleto.$error.vencimentoErrado).toBe(true);
+  });
+
+  it ('deverá estar inválido com código de boleto com vencimento incorreto', function () {
+    $rootScope.vencimento = '2015-10-16';
+
+    $scope.form1.boleto.$setViewValue('03399486637200000000900382501013665620000027342');
+    $scope.$digest();
+
+    expect($scope.form1.$valid).toBe(false);
+    expect($scope.form1.boleto.$valid).toBe(false);
+    expect($scope.form1.boleto.$error.vencimentoErrado).toBe(true);
+  });
+
+  it ('deverá estar inválido com código de boleto com vencimento incorreto', function () {
+    $rootScope.vencimento = '2015-10-10';
+
+    $scope.form1.boleto.$setViewValue('34191090080245328114503048490001265520000040800');
+    $scope.$digest();
+
+    expect($scope.form1.$valid).toBe(false);
+    expect($scope.form1.boleto.$valid).toBe(false);
+    expect($scope.form1.boleto.$error.vencimentoErrado).toBe(true);
+  });
+
+  it ('deverá estar inválido com código de boleto com vencimento incorreto', function () {
+    $rootScope.vencimento = '2015-10-05';
+
+    $scope.form1.boleto.$setViewValue('34191576687788152637800168490001656720000477000');
+    $scope.$digest();
+
+    expect($scope.form1.$valid).toBe(false);
+    expect($scope.form1.boleto.$valid).toBe(false);
+    expect($scope.form1.boleto.$error.vencimentoErrado).toBe(true);
+  });
+
+  it ('deverá estar inválido com código de boleto com vencimento incorreto', function () {
+    $rootScope.vencimento = '2015-10-16';
+
+    $scope.form1.boleto.$setViewValue('23792394099000001381480001149402658300000138180');
+    $scope.$digest();
+
+    expect($scope.form1.$valid).toBe(false);
+    expect($scope.form1.boleto.$valid).toBe(false);
+    expect($scope.form1.boleto.$error.vencimentoErrado).toBe(true);
+  });
+
+  it ('deverá estar inválido com código de boleto com vencimento incorreto', function () {
+    $rootScope.vencimento = '2015-10-21';
+
+    $scope.form1.boleto.$setViewValue('23793380039135264020470003365403165870000198100');
+    $scope.$digest();
+
+    expect($scope.form1.$valid).toBe(false);
+    expect($scope.form1.boleto.$valid).toBe(false);
+    expect($scope.form1.boleto.$error.vencimentoErrado).toBe(true);
+  });
+
+  it ('deverá estar inválido com código de boleto com vencimento incorreto', function () {
+    $rootScope.vencimento = '2015-12-26';
+
+    $scope.form1.boleto.$setViewValue('03399713352510130003320989801012666290000050276');
+    $scope.$digest();
+
+    expect($scope.form1.$valid).toBe(false);
+    expect($scope.form1.boleto.$valid).toBe(false);
+    expect($scope.form1.boleto.$error.vencimentoErrado).toBe(true);
+  });
+
+  it ('deverá estar inválido com código de boleto com vencimento incorreto', function () {
+    $rootScope.vencimento = '2015-11-15';
+
+    $scope.form1.boleto.$setViewValue('00190000090105380300100079495172965980000130064');
+    $scope.$digest();
+
+    expect($scope.form1.$valid).toBe(false);
+    expect($scope.form1.boleto.$valid).toBe(false);
+    expect($scope.form1.boleto.$error.vencimentoErrado).toBe(true);
+  });
+
 });
