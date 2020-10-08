@@ -1,4 +1,6 @@
 # angular-boleto
+- Usado em [fornecedor-web](https://github.com/hurbcom/fornecedor/blob/master/bower.json#L22)
+
 [pt-BR]
 
 Directive de angularjs para campo de boleto bancário com validação de dígitos verificadores e valor
