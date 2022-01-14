@@ -26,7 +26,7 @@ describe('Campo de boleto bancário', function () {
 
   it ('deverá estar válido com código de boleto válido', function () {
     $rootScope.valor = 0.00;
-    $scope.form1.boleto.$setViewValue('10491504263100090855355227287939364140000000000');
+    $scope.form1.boleto.$setViewValue('10491504263100090855355227287939664140000000000');
     $scope.$digest();
 
     expect($scope.form1.$valid).toBe(true);
@@ -35,7 +35,7 @@ describe('Campo de boleto bancário', function () {
 
   it ('deverá estar válido com código de boleto válido', function () {
     $rootScope.valor = 934.23;
-    $scope.form1.boleto.$setViewValue('10491443385511900000200000000141325230000093423');
+    $scope.form1.boleto.$setViewValue('10491443385511900000200000000141125230000093423');
     $scope.$digest();
 
     expect($scope.form1.$valid).toBe(true);
@@ -44,7 +44,7 @@ describe('Campo de boleto bancário', function () {
 
   it ('deverá estar válido com código de boleto válido', function () {
     $rootScope.valor = 0.00;
-    $scope.form1.boleto.$setViewValue('10491443385511900000200000000141325230000000000');
+    $scope.form1.boleto.$setViewValue('10491443385511900000200000000141725230000000000');
     $scope.$digest();
 
     expect($scope.form1.$valid).toBe(true);
@@ -53,7 +53,7 @@ describe('Campo de boleto bancário', function () {
 
   it ('deverá estar inválido com código de boleto com valor errado', function () {
     $rootScope.valor = 1274567.89;
-    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180100000987654321');
+    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180200000987654321');
     $scope.$digest();
 
     expect($scope.form1.$valid).toBe(false);
@@ -63,7 +63,7 @@ describe('Campo de boleto bancário', function () {
 
   it ('deverá estar válido com código de boleto com valor correto', function () {
     $rootScope.valor = 1274567.89;
-    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180100000127456789');
+    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180700000127456789');
     $scope.$digest();
 
     expect($scope.form1.$valid).toBe(true);
@@ -116,6 +116,15 @@ describe('Campo de boleto bancário', function () {
     expect($scope.form1.boleto.$error.bloco3Errado).toBe(true);
   });
 
+  it ('deverá estar inválido com código de boleto com verificador inválido', function () {
+    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180200000000000000');
+    $scope.$digest();
+
+    expect($scope.form1.$valid).toBe(false);
+    expect($scope.form1.boleto.$valid).toBe(false);
+    expect($scope.form1.boleto.$error.verificadorErrado).toBe(true);
+  });
+
   it ('deverá estar válido com código de boleto com vencimento correto', function () {
     $rootScope.vencimento = '2014-01-18';
     $scope.form1.boleto.$setViewValue('21890010070014560208200371313180159470127456789'); // 18/01/2014
@@ -128,7 +137,7 @@ describe('Campo de boleto bancário', function () {
 
   it ('deverá estar válido com código de boleto com vencimento correto', function () {
     $rootScope.vencimento = '2015-10-03';
-    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180165700127456789'); // 03/10/2015
+    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180365700127456789'); // 03/10/2015
     $scope.$digest();
 
     expect($scope.form1.$valid).toBe(true);
@@ -167,7 +176,7 @@ describe('Campo de boleto bancário', function () {
 
   it ('deverá estar inválido com código de boleto com vencimento menor a data de vencimento da ordem de pagamento', function () {
     $rootScope.vencimento = '01/01/2017';
-    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180570250127456789'); // 31/12/2016
+    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180270250127456789'); // 31/12/2016
     $scope.$digest();
 
     expect($scope.form1.$valid).toBe(false);
@@ -177,7 +186,7 @@ describe('Campo de boleto bancário', function () {
 
   it ('deverá estar válido com código de boleto com vencimento correto', function () {
     $rootScope.vencimento = '2014-03-12';
-    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180160000127456789'); // 12/03/2014
+    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180360000127456789'); // 12/03/2014
     $scope.$digest();
 
     expect($scope.form1.$valid).toBe(true);
@@ -187,7 +196,7 @@ describe('Campo de boleto bancário', function () {
 
   it ('deverá estar válido com código de boleto com fator de vencimento zerado', function () {
     $rootScope.vencimento = '2014-03-12';
-    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180100000127456789');
+    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180700000127456789');
     $scope.$digest();
 
     expect($scope.form1.$valid).toBe(true);
@@ -198,7 +207,7 @@ describe('Campo de boleto bancário', function () {
   /*** Testes para comunicado FEBRABAN de n° 082/2012 de 14/06/2012 ***/
   it ('deverá estar válido com código de boleto com vencimento correto', function () {
     $rootScope.vencimento = '2025-02-21';
-    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180199990127456789'); // 21/02/2025
+    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180499990127456789'); // 21/02/2025
     $scope.$digest();
 
     expect($scope.form1.$valid).toBe(true);
@@ -218,7 +227,7 @@ describe('Campo de boleto bancário', function () {
 
   it ('deverá estar válido com código de boleto com vencimento correto', function () {
     $rootScope.vencimento = '2025-02-23';
-    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180110010127456789'); // 04/07/2000
+    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180510010127456789'); // 04/07/2000
     $scope.$digest();
 
     expect($scope.form1.$valid).toBe(true);
@@ -249,7 +258,7 @@ describe('Campo de boleto bancário', function () {
 
   it ('deverá estar válido com código de boleto com valor correto', function () {
     $rootScope.valor = '1274567.89';
-    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180100000127456789');
+    $scope.form1.boleto.$setViewValue('21890010070014560208200371313180700000127456789');
     $scope.$digest();
 
     expect($scope.form1.$valid).toBe(true);
@@ -358,7 +367,7 @@ describe('Campo de boleto bancário', function () {
   it ('deverá estar inválido com código de boleto com vencimento incorreto', function () {
     $rootScope.vencimento = '2015-10-05';
 
-    $scope.form1.boleto.$setViewValue('34191576687788152637800168490001656720000477000');
+    $scope.form1.boleto.$setViewValue('34191576687788152637800168490001756720000477000');
     $scope.$digest();
 
     expect($scope.form1.$valid).toBe(false);
@@ -369,7 +378,7 @@ describe('Campo de boleto bancário', function () {
   it ('deverá estar inválido com código de boleto com vencimento incorreto', function () {
     $rootScope.vencimento = '2015-10-16';
 
-    $scope.form1.boleto.$setViewValue('23792394099000001381480001149402658300000138180');
+    $scope.form1.boleto.$setViewValue('23792394099000001381480001149402358300000138180');
     $scope.$digest();
 
     expect($scope.form1.$valid).toBe(false);
