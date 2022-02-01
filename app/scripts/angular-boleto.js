@@ -96,14 +96,6 @@ angular.module('angular.boleto', ['ui.mask'])
             return false;
           }
 
-          // TODO: Para poder calcular o dígito verificador será necessário identificar o banco pois há diferenças na verificação para alguns bancos como o BB por exemplo.
-          /*
-          if (numeroBoleto.length === 47 && calcularDigitoVerificadorGeral(numeroBoleto.substr(0, 4) + numeroBoleto.substr(5, 39)) != numeroBoleto.substr(4, 1)) {
-            scope.form[scope.name].$setValidity('verificadorErrado', false);
-            return false;
-          }
-          */
-
           if (numeroBoleto.length === 47 && validarBlocos(numeroBoleto)) {
             return true;
           }
@@ -120,7 +112,6 @@ angular.module('angular.boleto', ['ui.mask'])
           scope.form[scope.name].$setValidity('vencimentoErrado', true);
         }; // resetarValidade
 
-        /*
         var calcularDigitoVerificadorGeral = function (numero) {
           var soma  = 0;
           var peso  = 2;
@@ -141,7 +132,6 @@ angular.module('angular.boleto', ['ui.mask'])
             digito = 1;
           return digito;
         }; // calcularDigitoVerificadorGeral
-        */
 
         var calcularDigitoVerificador = function (numero) {
           var soma  = 0;
@@ -218,7 +208,12 @@ angular.module('angular.boleto', ['ui.mask'])
             return false;
           }
 
-          //var campo4 = numeroBoleto.substr(32, 1); // Digito verificador
+          var codBarras = numeroBoleto.substr(0, 4) + numeroBoleto.substr(32, 15) +
+            numeroBoleto.substr(4, 5) + numeroBoleto.substr(10, 10) + numeroBoleto.substr(21, 10);
+          if (calcularDigitoVerificadorGeral(codBarras.substr(0, 4) + codBarras.substr(5, 39)) != codBarras.substr(4, 1)) {
+            scope.form[scope.name].$setValidity('verificadorErrado', false);
+            return false;
+          }
 
           if (typeof scope.validarVencimento !== 'undefined' && scope.validarVencimento !== '') {
             var fatorVencimento = numeroBoleto.substr(33, 4);
